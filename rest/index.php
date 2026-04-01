@@ -1,0 +1,193 @@
+<?php
+// include 'Conexion.php';
+
+// $pdo = new Conexion();
+
+// if($_SERVER['REQUEST_METHOD'] == 'GET') {
+//     $sql = $pdo->prepare("SELECT * FROM usuarios");
+//     $sql->execute();
+//     $sql->setFetchMode(PDO::FETCH_ASSOC);
+//     header("HTTP/1.1 200 OK");
+//     echo json_encode($sql->fetchAll());
+//     exit;
+// }
+
+/** * <b>Descripcion:</b> Clase que <br/> Realiza la administración de las peticiones de usuario
+ * @author Miguel Angel Saenz Tibambre<a href = "mailto:miguel.saenz02@uptc.edu.co">miguel.saenz02@uptc.edu.co</a>
+ */
+/**
+ * *Importa los resources necesarios para el funcionamiento de la clase
+ */
+require 'ctrl/core/util/UtilAuth.php';
+require 'ctrl/core/auth/Authenticator.php';
+require 'cxn/Connection.php';
+require 'ctrl/core/commun/Request.php';
+require 'ctrl/core/commun/IRequest.php';
+require 'ctrl/business/Usuarios.php';
+require 'ctrl/core/commun/RequestLogin.php';
+require 'ctrl/core/segurity/Login.php';
+require 'ctrl/core/segurity/Roles.php';
+require 'view/ViewAPI.php';
+require 'view/ViewXML.php';
+require 'view/ViewJSON.php';
+require 'util/ExcepcionAPI.php';
+require 'util/Status.php';
+require 'util/MessageUser.php';
+require 'util/FormatType.php';
+require 'util/ContentBody.php';
+require 'util/ResourcesURL.php';
+require 'util/JSONUtil.php';
+// require 'model/core/segurity/User.php';
+require 'querys/core/SegurityQuery.php';
+require 'ctrl/core/segurity/ValidacionDatos.php';
+
+//Business
+// require 'ctrl/business/Persons.php';
+// require 'model/business/Person.php';
+// require 'ctrl/business/Pets.php';
+// require 'model/business/Pet.php';
+require 'model/core/security/Usuario.php';
+require 'querys/business/BusinessQuery.php';
+
+// Preparar manejo de excepciones
+/**
+ * *Formatos permitidos enviados por parametro
+ */
+$format = isset($_GET[FORMAT]) ? $_GET[FORMAT] : JSON;
+
+switch ($format) {
+    case XML:
+        $view = new ViewXML();
+        break;
+    case JSON:
+    default:
+        $view = new ViewJSON();
+}
+
+/**
+ * *Manejo de excepciones para el componente
+ */
+set_exception_handler(function ($exception) use ($view) {
+    // Cuando se presente error Call to undefined method Error::getState()
+    // comentar linea y descomentar siguiente
+    // $bodyAnswer   = new ContentBody($exception->getState(), $exception->getCode(), $exception->getMessage());
+    $bodyAnswer = new ContentBody(INTERNAL_SERVER_ERROR, ST500, $exception->getMessage());
+    $view->viewPrint($bodyAnswer);
+});
+
+// Extraer segmento de la url
+if (isset($_GET['PATH_INFO'])) {
+    $request = explode('/', $_GET['PATH_INFO']);
+    //Descomentariar para saber url
+    // print_r($request);
+} else {
+    throw new ExcepcionAPI(BAD_REQUEST, ST400, error_url);
+}
+
+// Separación de resources de la url
+$resource = $request[0];
+// print_r($request);
+// Recursos existentes para servicios rest
+$resourcesExisting = RESOURCES_URL;
+
+// Comprobar si existe el resource
+if (!in_array($resource, $resourcesExisting)) {
+    throw new ExcepcionAPI(NOT_FOUND, ST404, error_notExist);
+}
+
+$method = strtolower($_SERVER['REQUEST_METHOD']);
+// if ($resource == "login")
+//     $resource = "useraction";
+
+// Filtrar método
+switch ($method) {
+    case 'get':
+        // echo $resource . PHP_EOL . $method;
+        if (method_exists($resource, $method)) {
+            // echo "GET:\n resource:$resource \n metod:$method \n request:$request[0]\n";
+
+            // echo "GET:\n resource:$resource \n method:$method \n request:$request[0]\n";
+            // Innvoca para inicializar nombre de tabla
+            $instance = new $resource();
+            call_user_func(array(
+                $instance,
+                INIT_TABLE
+            ));
+            $cuerpo = (JSONUtil::decodeJSON());
+
+            // Innvoca la funciones http
+            $answer = call_user_func(array(
+                $resource,
+                $method
+            ), $cuerpo);
+            $view->viewPrint($answer);
+            break;
+        }
+    case 'post':
+        // echo "resource: $resource", PHP_EOL, "method: $method", PHP_EOL;
+        if (method_exists($resource, $method)) {
+            // if ($resource != "useraction") {
+            $instance = new $resource();
+            call_user_func(array(
+                $instance,
+                INIT_TABLE
+            ));
+            // }
+            //$request = JSONUtil::decodeJSON();
+
+            // Ejecuta la función post del recurso
+            // echo "$resource\n$method\n\n";
+            $answer = call_user_func(array(
+                $resource,
+                $method
+            ), $request);
+            $view->viewPrint($answer);
+            break;
+        }
+    case 'put':
+        if (method_exists($resource, $method)) {
+            // if ($resource != "useraction") {
+            $instance = new $resource;
+            call_user_func(array(
+                $instance,
+                INIT_TABLE
+            ));
+            // }
+            // $request = JSONUtil::decodeJSON();
+
+            // Ejecuta la función post del recurso
+            // echo "$resource\n$method\n\n";
+            $answer = call_user_func(array(
+                $resource,
+                $method
+            ), $request);
+            $view->viewPrint($answer);
+            break;
+        }
+    case 'delete': {
+        if (method_exists($resource, $method)) {
+            // Innvoca para inicializar nombre de tabla
+            // if ($resource != "useraction") {
+            $instance = new $resource;
+            call_user_func(array(
+                $instance,
+                INIT_TABLE
+            ));
+            // $request = JSONUtil::decodeJSON();
+            // }
+            // Innvoca la funciones http
+            $answer = call_user_func(array(
+                $resource,
+                $method
+            ), $request);
+            $view->viewPrint($answer);
+            break;
+        }
+    }
+    default: {
+        // Método no aceptado
+        $view->viewPrint($body);
+        throw new ExcepcionAPI(BAD_REQUEST, ST400, error_url);
+    }
+}
+?>
