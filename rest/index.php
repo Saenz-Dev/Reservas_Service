@@ -24,6 +24,18 @@ require 'cxn/Connection.php';
 require 'ctrl/core/commun/Request.php';
 require 'ctrl/core/commun/IRequest.php';
 require 'ctrl/business/Usuarios.php';
+require 'ctrl/business/Cabanias.php';
+require 'ctrl/core/segurity/Cuentas.php';
+require 'ctrl/business/Mesas.php';
+require 'ctrl/business/Reservas.php';
+require 'ctrl/business/Reservas_Cabania.php';
+require 'ctrl/business/Reservas_Mesa.php';
+require 'ctrl/business/Facturas.php';
+require 'ctrl/business/Clientes.php';
+require 'ctrl/business/Detalles_Facturas.php';
+require 'ctrl/business/Pagos.php';
+
+
 require 'ctrl/core/commun/RequestLogin.php';
 require 'ctrl/core/segurity/Login.php';
 require 'ctrl/core/segurity/Roles.php';
@@ -47,6 +59,7 @@ require 'ctrl/core/segurity/ValidacionDatos.php';
 // require 'ctrl/business/Pets.php';
 // require 'model/business/Pet.php';
 require 'model/core/security/Usuario.php';
+require 'model/business/Cabania.php';
 require 'querys/business/BusinessQuery.php';
 
 // Preparar manejo de excepciones
@@ -104,9 +117,7 @@ switch ($method) {
     case 'get':
         // echo $resource . PHP_EOL . $method;
         if (method_exists($resource, $method)) {
-            // echo "GET:\n resource:$resource \n metod:$method \n request:$request[0]\n";
-
-            // echo "GET:\n resource:$resource \n method:$method \n request:$request[0]\n";
+            // echo $resource . PHP_EOL . $method;
             // Innvoca para inicializar nombre de tabla
             $instance = new $resource();
             call_user_func(array(

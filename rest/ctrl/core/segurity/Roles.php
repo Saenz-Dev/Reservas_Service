@@ -23,6 +23,11 @@ class Roles extends Request
         parent::$queryDelete = DELETE_ROL;
     }
 
+    public function selectParameter($object, $statement)
+    {
+        $statement->bindParam(1, $object->id);
+    }
+
     /**
      * {@inheritDoc}
      * @see Request::updateParameter()
@@ -48,9 +53,9 @@ class Roles extends Request
      * {@inheritDoc}
      * @see Request::deleteParameter()
      */
-    public function deleteParameter($statement, $id)
+    public function deleteParameter($statement, $object)
     {
-        $statement->bindParam(1, $id);
+        $statement->bindParam(1, $object->id);
     }
 }
 ?>
