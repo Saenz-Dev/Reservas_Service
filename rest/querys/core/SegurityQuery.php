@@ -10,8 +10,8 @@
  */
 
 // Consulta para usuarios
-define("INSERT_USUARIO", "INSERT INTO usuario (nombres, apellidos, tipo_documento, numero_documento, telefono, direccion, ciudad, fecha_nacimiento, estado, id_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ");
-define("UPDATE_USUARIO", "UPDATE usuario SET  nombres = ?, apellidos = ?, tipo_documento = ? , numero_documento = ?, , telefono = ?, direccion = ?, ciudad = ?, fecha_nacimiento = ?, estado = ?, id_rol = ? WHERE id_usuario=? ;");
+define("INSERT_USUARIO", "INSERT INTO usuario (nombres, apellidos, tipo_documento, numero_documento, telefono, direccion, ciudad, fecha_nacimiento, estado, id_rol, token) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ");
+define("UPDATE_USUARIO", "UPDATE usuario SET  nombres = ?, apellidos = ?, tipo_documento = ? , numero_documento = ?, telefono = ?, direccion = ?, ciudad = ?, fecha_nacimiento = ?, estado = ?, id_rol = ?, token = ? WHERE id_usuario=? ;");
 define("SELECT_USUARIO", "SELECT * FROM usuario WHERE id_usuario = ?");
 define("DELETE_USUARIO", "UPDATE usuario SET estado=0 WHERE id_usuario=?");
 
@@ -19,7 +19,6 @@ define("DELETE_USUARIO", "UPDATE usuario SET estado=0 WHERE id_usuario=?");
 define("INSERT_ROL", "INSERT INTO rol(nombre, description) VALUES (?,?);");
 define("UPDATE_ROL", "UPDATE rol SET nombre=?, description =? WHERE id_rol=? ;");
 define("DELETE_ROL", "UPDATE rol SET description='borrado' WHERE id_rol=?");
-
 
 
 define("INTSERT_USUARIO", "INSERT INTO j4user(user,password,keyAPI,roles) VALUES(?,?,?,?);");

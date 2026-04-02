@@ -12,12 +12,22 @@ define("RESOURCES_URL", array(
     'roles',
     'clientes',
     'cuentas',
+    'cabanias',
+    'mesas',
+    'reservas',
+    'reservas_cabania',
+    'reservas_mesa',
+    'facturas',
+    'clientes',
+    'detalles_facturas',
+    'pagos',
+    
 
-    'useraction',
+    // 'useraction',
     //Business
-    'login',
-    'persons', 
-    'pets'
+    // 'login',
+    // 'persons', 
+    // 'pets'
 ));
 
 /**
