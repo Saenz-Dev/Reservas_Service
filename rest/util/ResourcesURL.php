@@ -21,6 +21,14 @@ define("RESOURCES_URL", array(
     'clientes',
     'detalles_facturas',
     'pagos',
+
+    'categorias',
+    'climas_info',
+    'notificaciones',
+    'tareas',
+    'usuarios_tareas',
+
+
     
 
     // 'useraction',

@@ -12,8 +12,8 @@ define("HOST_NAME", "localhost");
 /**
  * Provee las constantes del nombre de base de datos
  */
-define("DATA_BASE", "reservas");
-// define("DATA_BASE", "panther_crud");
+// define("DATA_BASE", "reservas"); //para reservas
+define("DATA_BASE", "tareas"); //para tareas
 /**
  * Provee las constantes de usuario para conectarse a la base de datos
  */

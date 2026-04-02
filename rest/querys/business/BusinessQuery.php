@@ -76,4 +76,35 @@ define("SELECT_PAGO", "SELECT * FROM pago WHERE id_pago=?");
 define("INSERT_PAGO", "INSERT INTO pago (fecha, monto, metodo, id_factura) VALUES (?,?,?,?);");
 define("UPDATE_PAGO", "UPDATE pago SET fecha = ?, monto=?, metodo=?, id_factura=? WHERE id_pago=?;");
 define("DELETE_PAGO", "DELETE FROM pago WHERE id_pago=?");
+
+// --------------------PROGRAMA DE TAREAS
+// Querys para usuarios tareas
+define("SELECT_USUARIO_TAREA", "SELECT * FROM usuario WHERE id_usuario=?");
+define("INSERT_USUARIO_TAREA", "INSERT INTO usuario (nombre, password, fecha_registro, email) VALUES (?,?,?,?);");
+define("UPDATE_USUARIO_TAREA", "UPDATE usuario SET nombre = ?, password=?, fecha_registro=?, email=? WHERE id_usuario=?;");
+define("DELETE_USUARIO_TAREA", "DELETE FROM usuario WHERE id_usuario=?");
+
+// Querys para categorias
+define("SELECT_CATEGORIA", "SELECT * FROM categoria WHERE id_categoria=?");
+define("INSERT_CATEGORIA", "INSERT INTO categoria (nombre, descripcion) VALUES (?,?);");
+define("UPDATE_CATEGORIA", "UPDATE categoria SET nombre=?, descripcion=? WHERE id_categoria=?;");
+define("DELETE_CATEGORIA", "DELETE FROM categoria WHERE id_categoria=?");
+
+// Querys para tareas
+define("SELECT_TAREA", "SELECT * FROM tarea WHERE id_tarea=?");
+define("INSERT_TAREA", "INSERT INTO tarea (titulo, descripcion, fecha_creacion, fecha_vencimiento, estado, id_usuario, id_categoria) VALUES (?,?,?,?,?,?,?);");
+define("UPDATE_TAREA", "UPDATE tarea SET titulo=?, descripcion=?, fecha_creacion=?, fecha_vencimiento=?, estado=?, id_usuario=?, id_categoria=? WHERE id_tarea=?;");
+define("DELETE_TAREA", "DELETE FROM tarea WHERE id_tarea=?");
+
+// Querys para clima_info
+define("SELECT_CLIMA", "SELECT * FROM clima_info WHERE id_clima=?");
+define("INSERT_CLIMA", "INSERT INTO clima_info (descripcion, fecha, id_tarea) VALUES (?,?,?);");
+define("UPDATE_CLIMA", "UPDATE clima_info SET descripcion=?, fecha=?, id_tarea=? WHERE id_clima=?;");
+define("DELETE_CLIMA", "DELETE FROM clima_info WHERE id_clima=?");
+
+// Querys para notificaciones
+define("SELECT_NOTIFICACION", "SELECT * FROM notificacion WHERE id_notificacion=?");
+define("INSERT_NOTIFICACION", "INSERT INTO notificacion (mensaje, fecha_envio, leida, id_usuario, id_tarea) VALUES (?,?,?,?,?);");
+define("UPDATE_NOTIFICACION", "UPDATE notificacion SET mensaje=?, fecha_envio=?, leida=?, id_usuario=?, id_tarea=? WHERE id_notificacion=?;");
+define("DELETE_NOTIFICACION", "DELETE FROM notificacion WHERE id_notificacion=?");
 ?>

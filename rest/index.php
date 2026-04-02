@@ -35,6 +35,13 @@ require 'ctrl/business/Clientes.php';
 require 'ctrl/business/Detalles_Facturas.php';
 require 'ctrl/business/Pagos.php';
 
+//require de Tareas
+require 'ctrl/tareas/business/Categorias.php';
+require 'ctrl/tareas/business/Notificaciones.php';
+require 'ctrl/tareas/business/Climas_Info.php';
+require 'ctrl/tareas/business/Tareas.php';
+require 'ctrl/tareas/core/security/Usuarios_Tareas.php';
+
 
 require 'ctrl/core/commun/RequestLogin.php';
 require 'ctrl/core/segurity/Login.php';
