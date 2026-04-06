@@ -23,7 +23,8 @@ define("DELETE_CABANIA", "UPDATE cabania SET estado=0 WHERE id_cabania=?");
 
 // Querys para cuenta
 define("SELECT_CUENTA", "SELECT * FROM cuenta WHERE id_cuenta=?");
-define("INSERT_CUENTA", "INSERT INTO cuenta (correo, contrasena, estado_sesion, id_usuario, token) VALUES (?,?,?,?,?);");
+define("INSERT_CUENTA", "INSERT INTO cuenta (correo, contrasena, estado_sesion, id_usuario) VALUES (?,?,?,?);");
+// define("INSERT_CUENTA", "INSERT INTO cuenta (correo, contrasena, estado_sesion, id_usuario, token) VALUES (?,?,?,?,?);");
 define("UPDATE_CUENTA", "UPDATE cuenta SET correo=?, contrasena =?, estado_sesion =?, id_usuario =?, token=? WHERE id_cuenta=? ;");
 define("DELETE_CUENTA", "UPDATE cuenta SET estado_sesion=0 WHERE id_cuenta=?");
 

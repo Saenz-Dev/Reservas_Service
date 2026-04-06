@@ -20,6 +20,8 @@ class Cuenta
     /** @var int */
     public $id_usuario;
 
+    public $token;
+
     public function getIdCuenta()
     {
         return $this->id_cuenta;
@@ -39,6 +41,10 @@ class Cuenta
     public function getIdUsuario()
     {
         return $this->id_usuario;
+    }
+    public function getToken()
+    {
+        return $this->token;
     }
 
     public function setIdCuenta($id)
@@ -60,5 +66,9 @@ class Cuenta
     public function setIdUsuario($id_usuario)
     {
         $this->id_usuario = $id_usuario;
+    }
+    public function setToken($token)
+    {
+        $this->token = $token;
     }
 }

@@ -24,23 +24,25 @@ class Cuentas extends Request
     }
 
     public function selectParameter($object, $statement) {
-        $statement->bindParam(1, $object->id);
+        $statement->bindParam(1, $id);
     }
 
 
     public function insertParameter($object, $statement)
     {
+        $encryptPassword = UtilAuth::encrytPassword($object->contrasena);
+        $keyApi = UtilAuth::getKeyAPI();
         $statement->bindParam(1, $object->correo);
-        $statement->bindParam(2, $object->contrasena);
+        $statement->bindParam(2, $encryptPassword);
         $statement->bindParam(3, $object->estado_sesion);
         $statement->bindParam(4, $object->id_usuario);
-        $statement->bindParam(5, $object->token);
     }
 
     public function updateParameter($object, $statement, $id)
     {
+        $encryptPassword = UtilAuth::encrytPassword($object->contrasena);
         $statement->bindParam(1, $object->correo);
-        $statement->bindParam(2, $object->contrasena);
+        $statement->bindParam(2, $encryptPassword);
         $statement->bindParam(3, $object->estado_sesion);
         $statement->bindParam(4, $object->id_usuario);
         $statement->bindParam(5, $object->token);

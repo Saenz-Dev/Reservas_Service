@@ -165,7 +165,7 @@ abstract class Request
     private static function getRequest($object)
     {
         try {
-            if (empty($object->id)) {
+            if (empty($object)) {
                 // echo 'Entra al if\n';
                 $query = "SELECT * FROM " . self::$nameTable;
                 // Preparar sentencia
@@ -178,7 +178,7 @@ abstract class Request
                 $statement = $pdo->prepare($query);
                 $instance = new static();
                 $instance->selectParameter($object, $statement);
-
+                
                 // // echo 'Entra a getRequest';
                 // $query = "SELECT * FROM " . self::$nameTable . " WHERE id=?";
                 // // Preparar statement

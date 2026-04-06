@@ -17,6 +17,7 @@ class Usuarios extends Request
     public function init()
     {
         parent::$nameTable = self::NAME_TABLE;
+        parent::$querySelect = SELECT_USUARIO;
         parent::$queryInsert = INSERT_USUARIO;
         parent::$queryUpdate = UPDATE_USUARIO;
         parent::$queryDelete = DELETE_USUARIO;
@@ -24,7 +25,8 @@ class Usuarios extends Request
 
     public function selectParameter($object, $statement)
     {
-        $statement->bindParam(1, $object->id);
+        
+        $statement->bindParam(1, $object);
     }
 
     public function insertParameter($object, $statement)
@@ -34,12 +36,10 @@ class Usuarios extends Request
         $statement->bindParam(3, $object->tipo_documento);
         $statement->bindParam(4, $object->numero_documento);
         $statement->bindParam(5, $object->telefono);
-        $statement->bindParam(6, $object->direccion);
-        $statement->bindParam(7, $object->ciudad);
-        $statement->bindParam(8, $object->fecha_nacimiento);
-        $statement->bindParam(9, $object->estado);
-        $statement->bindParam(10, $object->id_rol);
-        $statement->bindParam(11, $object->token);
+        $statement->bindParam(6, $object->ciudad);
+        $statement->bindParam(7, $object->fecha_nacimiento);
+        $statement->bindParam(8, $object->estado);
+        $statement->bindParam(9, $object->id_rol);
     }
 
     public function updateParameter($object, $statement, $id)
@@ -49,13 +49,10 @@ class Usuarios extends Request
         $statement->bindParam(3, $object->tipo_documento);
         $statement->bindParam(4, $object->numero_documento);
         $statement->bindParam(5, $object->telefono);
-        $statement->bindParam(6, $object->direccion);
-        $statement->bindParam(7, $object->ciudad);
-        $statement->bindParam(8, $object->fecha_nacimiento);
-        $statement->bindParam(9, $object->estado);
-        $statement->bindParam(10, $object->id_rol);
-        $statement->bindParam(11, $object->token);
-        $statement->bindParam(12, $id);
+        $statement->bindParam(6, $object->ciudad);
+        $statement->bindParam(7, $object->fecha_nacimiento);
+        $statement->bindParam(8, $object->estado);
+        $statement->bindParam(9, $object->id_rol);
     }
 
     public function deleteParameter($statement, $object)

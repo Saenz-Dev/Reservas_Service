@@ -14,7 +14,7 @@ class RequestLogin implements IRequest {
      */
     public function init()
     {
-        $instance = new Users();
+        $instance = new Cuentas();
         $instance->init();
     }
 

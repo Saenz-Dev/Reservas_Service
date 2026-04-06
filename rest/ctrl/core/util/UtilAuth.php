@@ -5,8 +5,9 @@
  *
  * @author MIguel Angel Saenz Tibambre <a href = "mailto:saenzm963@gmail.com">saenzm963@gmail.com</a>
  */
-class UtilAuth {
-        /**
+class UtilAuth
+{
+    /**
      * Protege la contraseña con un algoritmo de encriptado
      *
      * @param  $passwordPlain
@@ -14,10 +15,11 @@ class UtilAuth {
      */
     public static function encrytPassword($passwordPlain)
     {
-        if (!empty($passwordPlain))
+        if (!empty($passwordPlain)) {
             return password_hash($passwordPlain, PASSWORD_BCRYPT);
-        else
+        } else {
             return null;
+        }
     }
 
     /**
