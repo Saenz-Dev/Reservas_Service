@@ -37,7 +37,7 @@ class Authenticator
                 // Retorna el payload del token (info del usuario)
                 return $decoded->data;
             } catch (\Firebase\JWT\ExpiredException $e) {
-                throw new Exception("Token expirado", 401);
+                throw new Exception("Token expirado", 419);
             } catch (\Exception $e) {
                 throw new Exception("Token inválido", 401);
             }

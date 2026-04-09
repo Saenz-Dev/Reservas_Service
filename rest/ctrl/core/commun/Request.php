@@ -100,9 +100,16 @@ abstract class Request
      */
     public static function get($request)
     {
-        // Authenticator::authenticator();
+        // print_r($request);
+        $request = explode('/', $_GET['PATH_INFO']);
+        // echo "resource: $request[0]", PHP_EOL, "method: get", PHP_EOL;
+        if ($request[0] != "usuarios_tareas" ) {
+            Authenticator::authenticator();
+        }
+        $request = $_GET['id'] ?? null;
+        
         // $otro = JSONUtil::decodeJSON();
-        // print_r($otro);
+        // print_r($request);
         if (empty($request)) {
             return self::getRequest(null);
         } else {
@@ -118,7 +125,9 @@ abstract class Request
      */
     public static function post($request)
     {
-        // Authenticator::authenticator();
+        if ($request[0] != "usuarios_tareas") {
+            Authenticator::authenticator();
+        }
         $body = \JSONUtil::decodeJSON();
         ValidacionDatos::validarDatos($request, $body);
         self::createRequest($body);
@@ -135,9 +144,10 @@ abstract class Request
      */
     public static function put($request)
     {
-        // Authenticator::authenticator();
+        Authenticator::authenticator();
         $body = \JSONUtil::decodeJSON();
         ValidacionDatos::validarDatos($request, $body);
+        // print_r($body);
         $tempo = self::updateRequest($body, $body->id);
 
         if ($tempo > 0) {
@@ -149,7 +159,7 @@ abstract class Request
 
     public static function delete($request)
     {
-        // Authenticator::authenticator();
+        Authenticator::authenticator();
         $object = \JSONUtil::decodeJSON();
         self::deleteRequest($object);
         return $bodyAnswer = new ContentBody(OK, ST200, sucessful);
@@ -166,6 +176,7 @@ abstract class Request
     {
         try {
             if (empty($object)) {
+                // print_r($object);
                 // echo 'Entra al if\n';
                 $query = "SELECT * FROM " . self::$nameTable;
                 // Preparar sentencia
@@ -178,7 +189,7 @@ abstract class Request
                 $statement = $pdo->prepare($query);
                 $instance = new static();
                 $instance->selectParameter($object, $statement);
-                
+
                 // // echo 'Entra a getRequest';
                 // $query = "SELECT * FROM " . self::$nameTable . " WHERE id=?";
                 // // Preparar statement

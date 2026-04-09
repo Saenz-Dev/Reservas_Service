@@ -7,7 +7,7 @@ Header always set Access-Control-Allow-Credentials "true"
 Header always set Access-Control-Max-Age "1000"
 Header set Access-Control-Allow-Origin "http://localhost:4200"
 Header set Access-Control-Allow-Headers "Content-Type, Authorization"
-Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?PATH_INFO=$1 [L,QSA]

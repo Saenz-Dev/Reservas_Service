@@ -18,6 +18,7 @@
 // require_once __DIR__ . '/../../../vendor/firebase/php-jwt/src/JWT.php';
 // require_once __DIR__ . '/../../../vendor/firebase/php-jwt/src/Key.php';
 require_once __DIR__ . '/../../../model/core/security/Cuenta.php';
+require_once __DIR__ . '/../../../model/business/Usuario_Tareas.php';
 require_once __DIR__ . '/../../../vendor/autoload.php';
 require_once __DIR__ . '/../../../config.php';
 
@@ -40,12 +41,17 @@ class Login extends RequestLogin
             $userBD = self::authenticate($userLogin->correo, $userLogin->contrasena);
             if ($userBD != NULL) {
                 // echo "Usuario autenticado: " . $userBD['correo'];
-                $cuenta = new Cuenta();
+                // $cuenta = new Cuenta();
+                // $cuenta->correo = $userBD['correo'];
+                // $cuenta->estado_sesion = 1;
+                // $cuenta->token = $userBD['token'];
+                // $cuenta->id_usuario = $userBD['id_usuario'];
+
+                $cuenta = new Usuario_Tareas();
                 $cuenta->correo = $userBD['correo'];
-                $cuenta->estado_sesion = 1;
+                $cuenta->nombre = $userBD['nombre'];
                 $cuenta->token = $userBD['token'];
                 $cuenta->id_usuario = $userBD['id_usuario'];
-
                 $bodyAnswer = new ContentBody(OK, ST200, $cuenta);
                 return $bodyAnswer;
             } else {
@@ -73,9 +79,11 @@ class Login extends RequestLogin
         $statement->bindParam(1, $userA);
         $statement->execute();
         $user = $statement->fetch();
-        
-        if ($user == NULL) {return null;}
-            
+
+        if ($user == NULL) {
+            return null;
+        }
+
         if (password_verify(trim($passwordPlain), $user["contrasena"])) {
             //Aqui va la asignacion del token
             $user['token'] = $this->generarToken($user);
@@ -93,8 +101,11 @@ class Login extends RequestLogin
             'iat' => $issuedAt,      // issued at
             'exp' => $expire,        // expiración
             'data' => [              // Datos del usuario
-                'id' => $usuario['id_usuario'],
-                'email' => $usuario['correo'],
+                // 'id' => $usuario['id_usuario'],
+                // 'email' => $usuario['correo'],
+
+                'correo' => $usuario['correo'],
+                'id' => $usuario['id_usuario']
             ]
         ];
 

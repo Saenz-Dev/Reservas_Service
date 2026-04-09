@@ -52,7 +52,13 @@ require 'ctrl/tareas/business/Notificaciones.php';
 require 'ctrl/tareas/business/Climas_Info.php';
 require 'ctrl/tareas/business/Tareas.php';
 require 'ctrl/tareas/core/security/Usuarios_Tareas.php';
+require 'ctrl/core/commun/RequestFiltrosTareas.php';
+require 'ctrl/tareas/business/Tareas_Usuario.php';
+require 'ctrl/tareas/business/Filt_Tarea_Prioridad.php';
 
+// Require de Email
+require 'ctrl/core/commun/RequestCorreo.php';
+require 'ctrl/core/mail/Email.php';
 
 require 'ctrl/core/commun/RequestLogin.php';
 require 'ctrl/core/segurity/Login.php';
@@ -70,6 +76,7 @@ require 'util/JSONUtil.php';
 // require 'model/core/segurity/User.php';
 require 'querys/core/SegurityQuery.php';
 require 'ctrl/core/segurity/ValidacionDatos.php';
+
 
 //Business
 // require 'ctrl/business/Persons.php';
@@ -149,7 +156,6 @@ if (!in_array($resource, $resourcesExisting)) {
 $method = strtolower($_SERVER['REQUEST_METHOD']);
 // if ($resource == "login")
 //     $resource = "useraction";
-
 // Filtrar método
 switch ($method) {
     case 'get':
@@ -184,7 +190,6 @@ switch ($method) {
             ));
             // }
             //$request = JSONUtil::decodeJSON();
-
             // Ejecuta la función post del recurso
             // echo "$resource\n$method\n\n";
             $answer = call_user_func(array(

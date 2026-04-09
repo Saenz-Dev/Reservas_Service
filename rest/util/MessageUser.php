@@ -17,5 +17,6 @@ define("sucessful", "Transacción Exitosa");
 define("error_KeyAPI", "Se requiere Token para autenticar, Verifique nombre de parametro");
 define("error_Structure_data", "Longitud de datos incorrecta, verifique los datos.");
 define("error_numeric_data", "Los datos no pueden ser numéricos.");
+define("token_expired", "El token ha expirado, por favor inicie sesión nuevamente.");
 
 ?>

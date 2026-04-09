@@ -23,8 +23,8 @@ define("DELETE_ROL", "UPDATE rol SET description='borrado' WHERE id_rol=?");
 
 // define("INTSERT_USUARIO", "INSERT INTO j4user(user,password,keyAPI,roles) VALUES(?,?,?,?);");
 // define("UPDATE_USER", "UPDATE j4user SET  password = ?, keyAPI = ?, roles = ? WHERE id=? ;");
-define("SELECT_USER", "SELECT contrasena,correo,estado_sesion,id_usuario,token FROM cuenta WHERE correo like ?");
-define("VERIFY_KEYAPI", "SELECT COUNT(correo) FROM cuenta WHERE token=?");
+define("SELECT_USER", "SELECT contrasena,correo,nombre,id_usuario FROM usuario WHERE correo like ?");
+define("VERIFY_KEYAPI", "SELECT COUNT(correo) FROM usuario WHERE token=?");
 
 
 ?>

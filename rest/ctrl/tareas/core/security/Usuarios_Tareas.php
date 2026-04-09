@@ -24,18 +24,22 @@ class Usuarios_Tareas extends Request
 
     public function insertParameter($object, $statement)
     {
+        $encryptPassword = UtilAuth::encrytPassword($object->contrasena);
+        
+        $keyApi = UtilAuth::getKeyAPI();
         $statement->bindParam(1, $object->nombre);
-        $statement->bindParam(2, $object->password);
+        $statement->bindParam(2, $encryptPassword);
         $statement->bindParam(3, $object->fecha_registro);
-        $statement->bindParam(4, $object->email);
+        $statement->bindParam(4, $object->correo);
     }
 
     public function updateParameter($object, $statement, $id)
     {
+        $encryptPassword = UtilAuth::encrytPassword($object->contrasena);
         $statement->bindParam(1, $object->nombre);
-        $statement->bindParam(2, $object->password);
+        $statement->bindParam(2, $encryptPassword);
         $statement->bindParam(3, $object->fecha_registro);
-        $statement->bindParam(4, $object->email);
+        $statement->bindParam(4, $object->correo);
         $statement->bindParam(5, $id);
     }
 

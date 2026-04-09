@@ -27,6 +27,9 @@ define("RESOURCES_URL", array(
     'notificaciones',
     'tareas',
     'usuarios_tareas',
+    'tareas_usuario',
+    'filt_tarea_prioridad',
+    'email',
 
 
     

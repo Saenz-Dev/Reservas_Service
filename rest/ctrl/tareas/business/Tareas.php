@@ -31,6 +31,7 @@ class Tareas extends Request
         $statement->bindParam(5, $object->estado);
         $statement->bindParam(6, $object->id_usuario);
         $statement->bindParam(7, $object->id_categoria);
+        $statement->bindParam(8, $object->prioridad);
     }
 
     public function updateParameter($object, $statement, $id)
@@ -42,7 +43,8 @@ class Tareas extends Request
         $statement->bindParam(5, $object->estado);
         $statement->bindParam(6, $object->id_usuario);
         $statement->bindParam(7, $object->id_categoria);
-        $statement->bindParam(8, $id);
+        $statement->bindParam(8, $object->prioridad);
+        $statement->bindParam(9, $id);
     }
 
     public function deleteParameter($statement, $object)

@@ -34,6 +34,12 @@ define("UNAUTHORIZED", "UNAUTHORIZED");
 define("ST401", 401);
 
 /**
+ * Estado exitoso de la transacción con token expirado
+ */
+define("TOKEN_EXPIRED", "TOKEN_EXPIRED");
+define("ST419", 419);
+
+/**
  * Estado exitoso de la transacción no procesada por error cliente
  */
 define("FORBIDDEN", "FORBIDDEN");

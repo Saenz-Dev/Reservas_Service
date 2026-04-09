@@ -78,12 +78,17 @@ define("INSERT_PAGO", "INSERT INTO pago (fecha, monto, metodo, id_factura) VALUE
 define("UPDATE_PAGO", "UPDATE pago SET fecha = ?, monto=?, metodo=?, id_factura=? WHERE id_pago=?;");
 define("DELETE_PAGO", "DELETE FROM pago WHERE id_pago=?");
 
-// --------------------PROGRAMA DE TAREAS
+// --------------------PROGRAMA DE TAREAS ---------------------------------
 // Querys para usuarios tareas
 define("SELECT_USUARIO_TAREA", "SELECT * FROM usuario WHERE id_usuario=?");
-define("INSERT_USUARIO_TAREA", "INSERT INTO usuario (nombre, password, fecha_registro, email) VALUES (?,?,?,?);");
-define("UPDATE_USUARIO_TAREA", "UPDATE usuario SET nombre = ?, password=?, fecha_registro=?, email=? WHERE id_usuario=?;");
+define("INSERT_USUARIO_TAREA", "INSERT INTO usuario (nombre, contrasena, fecha_registro, correo) VALUES (?,?,?,?);");
+define("UPDATE_USUARIO_TAREA", "UPDATE usuario SET nombre = ?, contrasena=?, fecha_registro=?, correo=? WHERE id_usuario=?;");
 define("DELETE_USUARIO_TAREA", "DELETE FROM usuario WHERE id_usuario=?");
+
+// Querys para usuarios tareas
+define("SELECT_TAREA_USUARIO", "SELECT * FROM tarea WHERE id_usuario=?");
+define("UPDATE_TAREA_USUARIO", "UPDATE tarea SET id_tarea = ?, titulo=?, fecha_vencimiento=?, estado, id_usuario, prioridad WHERE id_usuario=?;");
+define("DELETE_TAREA_USUARIO", "DELETE FROM tarea WHERE id_usuario=?");
 
 // Querys para categorias
 define("SELECT_CATEGORIA", "SELECT * FROM categoria WHERE id_categoria=?");
@@ -93,8 +98,8 @@ define("DELETE_CATEGORIA", "DELETE FROM categoria WHERE id_categoria=?");
 
 // Querys para tareas
 define("SELECT_TAREA", "SELECT * FROM tarea WHERE id_tarea=?");
-define("INSERT_TAREA", "INSERT INTO tarea (titulo, descripcion, fecha_creacion, fecha_vencimiento, estado, id_usuario, id_categoria) VALUES (?,?,?,?,?,?,?);");
-define("UPDATE_TAREA", "UPDATE tarea SET titulo=?, descripcion=?, fecha_creacion=?, fecha_vencimiento=?, estado=?, id_usuario=?, id_categoria=? WHERE id_tarea=?;");
+define("INSERT_TAREA", "INSERT INTO tarea (titulo, descripcion, fecha_creacion, fecha_vencimiento, estado, id_usuario, id_categoria, prioridad) VALUES (?,?,?,?,?,?,?,?);");
+define("UPDATE_TAREA", "UPDATE tarea SET titulo=?, descripcion=?, fecha_creacion=?, fecha_vencimiento=?, estado=?, id_usuario=?, id_categoria=?, prioridad=? WHERE id_tarea=?;");
 define("DELETE_TAREA", "DELETE FROM tarea WHERE id_tarea=?");
 
 // Querys para clima_info
@@ -108,4 +113,10 @@ define("SELECT_NOTIFICACION", "SELECT * FROM notificacion WHERE id_notificacion=
 define("INSERT_NOTIFICACION", "INSERT INTO notificacion (mensaje, fecha_envio, leida, id_usuario, id_tarea) VALUES (?,?,?,?,?);");
 define("UPDATE_NOTIFICACION", "UPDATE notificacion SET mensaje=?, fecha_envio=?, leida=?, id_usuario=?, id_tarea=? WHERE id_notificacion=?;");
 define("DELETE_NOTIFICACION", "DELETE FROM notificacion WHERE id_notificacion=?");
+
+// Querys para tareas
+define("SELECT_TAREA_FILTRADA", "SELECT * FROM tarea WHERE id_usuario=? AND prioridad=?;");
+define("INSERT_TAREA_FILTRADA", "SELECT * FROM tarea WHERE id_usuario=? AND prioridad=?;");
+define("UPDATE_TAREA_FILTRADA", "SELECT * FROM tarea WHERE id_usuario=? AND prioridad=?;");
+define("DELETE_TAREA_FILTRADA", "SELECT * FROM tarea WHERE id_usuario=? AND prioridad=?;");
 ?>
