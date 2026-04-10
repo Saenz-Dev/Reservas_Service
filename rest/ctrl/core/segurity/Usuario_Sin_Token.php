@@ -10,8 +10,6 @@ class Usuario_Sin_Token extends RequestUsuarioSinToken
     {
         try {
             $id = $_GET['id'];
-            
-
             if ($id != NULL) {
                 $query = SELECT_USUARIO;
                 $statement = Connection::getInstance()->getConnection()->prepare($query);

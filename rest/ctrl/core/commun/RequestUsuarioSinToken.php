@@ -15,7 +15,7 @@ class RequestUsuarioSinToken implements IRequest
      */
     public function init()
     {
-        
+
     }
 
     /**
@@ -26,13 +26,15 @@ class RequestUsuarioSinToken implements IRequest
     {
         $request = explode('/', $_GET['PATH_INFO']);
         $instance = new Usuario_Sin_Token();
-        if ($request[0] == self::USUARIO_SIN_TOKEN && isset($_GET['id']) ) {
-            return $instance->consultarUsuarios();
-        } else if ($request[0] == self::USUARIO_SIN_TOKEN && isset($_GET['id']) && $_GET['id'] != NULL) {
-            return $instance->consultarUsuario();
-        } else if ($request[0] == self::USUARIO_SIN_TOKEN && isset($_GET['id_usuario']) && $_GET['id_usuario'] != NULL) {
-            return $instance->consultarUsuarioId();
-        } else {
+        if ($request[0] == self::USUARIO_SIN_TOKEN && (isset($_GET['id']) || isset($_GET['id_usuario']) && $_GET['id_usuario'] != NULL)) {
+            if ($request[0] == self::USUARIO_SIN_TOKEN && isset($_GET['id']) && $_GET['id'] != NULL) {
+                return $instance->consultarUsuario();
+            } else if ($request[0] == self::USUARIO_SIN_TOKEN && isset($_GET['id_usuario']) && $_GET['id_usuario'] != NULL) {
+                return $instance->consultarUsuarioId();
+            } else {
+                return $instance->consultarUsuarios();
+            }
+            } else {
             throw new ExcepcionApi(NOT_FOUND, ST404, error_notExist);
         }
     }

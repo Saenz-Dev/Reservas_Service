@@ -53,6 +53,7 @@ class Usuarios extends Request
         $statement->bindParam(7, $object->fecha_nacimiento);
         $statement->bindParam(8, $object->estado);
         $statement->bindParam(9, $object->id_rol);
+        $statement->bindParam(10, $id);
     }
 
     public function deleteParameter($statement, $object)
