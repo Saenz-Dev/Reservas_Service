@@ -45,6 +45,10 @@ require 'ctrl/business/Facturas.php';
 require 'ctrl/business/Clientes.php';
 require 'ctrl/business/Detalles_Facturas.php';
 require 'ctrl/business/Pagos.php';
+require 'ctrl/core/commun/RequestRegistrarCuenta.php';
+require 'ctrl/core/segurity/Registrar_Cuenta.php';
+require 'ctrl/core/commun/RequestUsuarioSinToken.php';
+require 'ctrl/core/segurity/Usuario_Sin_Token.php';
 
 //require de Tareas
 require 'ctrl/tareas/business/Categorias.php';

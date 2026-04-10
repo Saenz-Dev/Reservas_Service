@@ -21,6 +21,8 @@ define("RESOURCES_URL", array(
     'clientes',
     'detalles_facturas',
     'pagos',
+    'registrar_cuenta',
+    'usuario_sin_token',
 
     'categorias',
     'climas_info',

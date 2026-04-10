@@ -39,19 +39,22 @@ class Login extends RequestLogin
         try {
             $userLogin = JSONUtil::decodeJSON();
             $userBD = self::authenticate($userLogin->correo, $userLogin->contrasena);
+
+            // echo "Llega al login";
             if ($userBD != NULL) {
-                // echo "Usuario autenticado: " . $userBD['correo'];
-                // $cuenta = new Cuenta();
+                $cuenta = new Cuenta();
+                $cuenta->correo = $userBD['correo'];
+                $cuenta->estado_sesion = 1;
+                $cuenta->id_usuario = $userBD['id_usuario'];
+                $cuenta->token = $userBD['token'];
+                $cuenta->id_cuenta = $userBD['id_cuenta'];
+
+
+                // $cuenta = new Usuario_Tareas();
                 // $cuenta->correo = $userBD['correo'];
-                // $cuenta->estado_sesion = 1;
+                // $cuenta->nombre = $userBD['nombre'];
                 // $cuenta->token = $userBD['token'];
                 // $cuenta->id_usuario = $userBD['id_usuario'];
-
-                $cuenta = new Usuario_Tareas();
-                $cuenta->correo = $userBD['correo'];
-                $cuenta->nombre = $userBD['nombre'];
-                $cuenta->token = $userBD['token'];
-                $cuenta->id_usuario = $userBD['id_usuario'];
                 $bodyAnswer = new ContentBody(OK, ST200, $cuenta);
                 return $bodyAnswer;
             } else {
@@ -78,13 +81,14 @@ class Login extends RequestLogin
         $statement = Connection::getInstance()->getConnection()->prepare($query);
         $statement->bindParam(1, $userA);
         $statement->execute();
-        $user = $statement->fetch();
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        // echo "Llega al post del login: ";
 
         if ($user == NULL) {
             return null;
         }
-
-        if (password_verify(trim($passwordPlain), $user["contrasena"])) {
+        // echo 'Llega a la autenticación';
+        if (password_verify($passwordPlain, $user["contrasena"])) {
             //Aqui va la asignacion del token
             $user['token'] = $this->generarToken($user);
             return $user;
@@ -101,11 +105,15 @@ class Login extends RequestLogin
             'iat' => $issuedAt,      // issued at
             'exp' => $expire,        // expiración
             'data' => [              // Datos del usuario
-                // 'id' => $usuario['id_usuario'],
-                // 'email' => $usuario['correo'],
+                'id_usuario' => $usuario['id_usuario'],
+                'email' => $usuario['correo'],
+                'contrasena' => $usuario['contrasena'],
+                'id_cuenta' => $usuario['id_cuenta'],
+                'estado_sesion' => $usuario['estado_sesion']
 
-                'correo' => $usuario['correo'],
-                'id' => $usuario['id_usuario']
+
+                // 'correo' => $usuario['correo'],
+                // 'id' => $usuario['id_usuario']
             ]
         ];
 
