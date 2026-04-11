@@ -7,21 +7,25 @@
 /**
  * Provee las constantes del nombre del host para conectarse a la base de datos
  */
-define("HOST_NAME", "localhost");
+// define("HOST_NAME", "localhost");
+define("HOST_NAME", "mysql-task-manager.alwaysdata.net");
 // define("HOST_NAME", "mysql-panther.alwaysdata.net");
 /**
  * Provee las constantes del nombre de base de datos
  */
+define("DATA_BASE", "task-manager_database"); //para tareas
 // define("DATA_BASE", "reservas"); //para reservas
-define("DATA_BASE", "tareas"); //para tareas
+// define("DATA_BASE", "tareas"); //para tareas
 /**
  * Provee las constantes de usuario para conectarse a la base de datos
  */
-define("USER", "root");
+define("USER", "task-manager");
+// define("USER", "root");
 // define("USER", "panther");
 /**
  * Provee las constantes de contraseña para conectarse a la base de datos
  */
-define("PASSWORD", "");
+define("PASSWORD", "Niosaenz123");
+// define("PASSWORD", "");
 // define("PASSWORD", "Panther.343");
 ?>

@@ -92,7 +92,8 @@ require 'querys/business/BusinessQuery.php';
 // header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
 // Allow the specific origin
-header("Access-Control-Allow-Origin: http://localhost:4200");
+// header("Access-Control-Allow-Origin: http://localhost:4200");
+header("Access-Control-Allow-Origin: *");
 // Allow the Content-Type header specifically
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 // Allow the HTTP methods you are using
